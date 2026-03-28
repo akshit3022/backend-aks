@@ -2,6 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 
+import DataBaseConnection from "./config/db.js";
+
 dotenv.config();
 
 const app = express();
@@ -44,6 +46,18 @@ app.get("/", (req, res) => {
   res.send("API is running...");
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-});
+const startServer = async () => {
+  try {
+    await DataBaseConnection();
+    console.log("🗄️ Database connected successfully");
+
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error("❌ DB connection failed:", error);
+    process.exit(1);
+  }
+};
+
+startServer();

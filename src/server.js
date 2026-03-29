@@ -4,6 +4,8 @@ import cors from "cors";
 
 import DataBaseConnection from "./config/db.js";
 
+import ProductRouter from "./routes/productRoutes.js";
+
 dotenv.config();
 
 const app = express();
@@ -61,3 +63,5 @@ const startServer = async () => {
 };
 
 startServer();
+
+app.use("/api/product", ProductRouter);

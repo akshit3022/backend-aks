@@ -7,6 +7,7 @@ import DataBaseConnection from "./config/db.js";
 import ProductRouter from "./routes/productRoutes.js";
 import CategoryRouter from "./routes/CategoryRoutes.js";
 import PosterRouter from "./routes/PosterRoutes.js";
+import SectionRouter from "./routes/SectionRoutes.js"
 
 
 dotenv.config();
@@ -69,3 +70,4 @@ startServer();
 app.use("/api/product", ProductRouter);
 app.use("/api/category", CategoryRouter);
 app.use("/api/poster", PosterRouter);
+app.use("/api/section", SectionRouter);

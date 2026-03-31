@@ -57,12 +57,12 @@ app.use("/api/category", CategoryRouter);
 app.use("/api/poster", PosterRouter);
 app.use("/api/section", SectionRouter);
 app.use("/api/auth", authRoutes);
+app.use("/api/user", userRoutes);
 
 
 const startServer = async () => {
   try {
     await DataBaseConnection();
-    console.log("🗄️ Database connected successfully");
 
     app.listen(PORT, () => {
       console.log(`🚀 Server running on port ${PORT}`);

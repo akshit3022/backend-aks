@@ -29,7 +29,8 @@ export const sendOtpController = async (req, res) => {
 };
 
 // 2️⃣ Verify OTP
-export const verifyOtpController = async (req, res) => {
+export const verifyOtpController = async (req, res) => {   
+  console.log("STEP 1: Verify Otp Controller start");
   try {
     const { mobile, otp } = req.body;
     if (!mobile || !otp) {
@@ -37,8 +38,11 @@ export const verifyOtpController = async (req, res) => {
     }
 
     await verifyOtp(mobile, otp);
+    console.log("STEP 2: OTP verified")
 
     const user = await User.findOne({ mobile });
+    console.log("STEP 3: User fetched");
+
     if (!user) {
       return res.status(404).json({ success: false, message: "User not found" });
     }
@@ -49,8 +53,11 @@ export const verifyOtpController = async (req, res) => {
 
     // 🔑 Important — Invalidate old sessions
     await user.incrementTokenVersion();
+    console.log("STEP 4: Token version updated");
+
 
     await user.save();
+    console.log("STEP 5: User saved");
 
     const token = generateToken(user);
 

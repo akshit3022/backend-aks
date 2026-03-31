@@ -40,12 +40,15 @@ export async function sendOtp(mobile, purpose = "login") {
 }
 
 export async function verifyOtp(mobile, otp) {
+  console.log("SERVICE: verify otp starts");
   const record = await Otp.findOne({ mobile, used: false }).sort({
     createdAt: -1,
   });
 
   if (!record) throw new Error("OTP not found or already used");
+  console.log("SERVICE: Record found");
   if (record.isExpired()) throw new Error("OTP expired");
+  console.log("SERVICE: Not Expired check")
 
   // Check attempts
   if (record.attempts >= record.maxAttempts) {
@@ -61,6 +64,7 @@ export async function verifyOtp(mobile, otp) {
 
   // Mark OTP used
   await record.markUsed();
+  console.log("SERVICE: OTP marked as used");
   return { success: true };
 }
 

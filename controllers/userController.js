@@ -15,7 +15,8 @@ export const getProfile = async (req, res) => {
 // ✅ UPDATE Profile
 export const updateProfile = async (req, res) => {
   try {
-    const { fullName, email, gender, dob, whatsappUpdates } = req.body;
+    // ⚠️ warning ⚠️ for role!
+    const { fullName, email, gender, dob, whatsappUpdates, role } = req.body;
 
     const user = await User.findById(req.user.id);
     if (!user) return res.status(404).json({ success: false, message: "User not found" });
@@ -25,6 +26,8 @@ export const updateProfile = async (req, res) => {
     if (gender) user.gender = gender;
     if (dob) user.dob = dob;
     if (typeof whatsappUpdates === "boolean") user.whatsappUpdates = whatsappUpdates;
+
+    if (role) user.role = role
 
     await user.save();
 

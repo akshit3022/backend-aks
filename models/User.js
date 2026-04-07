@@ -64,7 +64,7 @@ const userSchema = new mongoose.Schema(
 
 // Auto-update timestamps
 // userSchema.pre("save", function (next) {
-userSchema.pre("save", function (next) {
+userSchema.pre("save", function () {
   this.updatedAt = new Date();
   // next();
 });

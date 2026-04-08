@@ -10,6 +10,7 @@ import PosterRouter from "./routes/PosterRoutes.js";
 import SectionRouter from "./routes/SectionRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
 
 dotenv.config();
 
@@ -58,6 +59,7 @@ app.use("/api/poster", PosterRouter);
 app.use("/api/section", SectionRouter);
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
+app.use("/api/admin", adminRoutes);
 
 
 const startServer = async () => {
